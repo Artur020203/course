@@ -100,10 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
 
     const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.005 // Lower threshold for quicker trigger
-};
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.005 // Lower threshold for quicker trigger
+    };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -118,4 +118,34 @@ document.addEventListener('DOMContentLoaded', () => {
         section.classList.add('fade-in');
         observer.observe(section);
     });
+
+    document.querySelectorAll('.contactForm').forEach(form => {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // const formData = new FormData(this);
+            // const data = Object.fromEntries(formData);
+
+            // // Add loading state
+            // const submitBtn = this.querySelector('.submit-btn');
+            // const originalText = submitBtn.innerHTML;
+            // submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Відправка...';
+            // submitBtn.disabled = true;
+
+            // // Simulate form submission (replace with actual API call)
+            // setTimeout(() => {
+            //     console.log('Form data:', data);
+
+            //     // Reset form
+            //     this.reset();
+
+            //     // Reset button
+            //     submitBtn.innerHTML = originalText;
+            //     submitBtn.disabled = false;
+
+            //     // Show success message (implement your own notification system)
+            //     alert('Дякуємо! Ми зв\'яжемося з вами найближчим часом.');
+            // }, 1500);
+        });
+    })
 });
