@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const observerOptions = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.05 // Lower threshold for quicker trigger
+    threshold: 0.005 // Lower threshold for quicker trigger
 };
 
     const observer = new IntersectionObserver((entries, observer) => {
