@@ -100,10 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
 
     const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-    };
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.05 // Lower threshold for quicker trigger
+};
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {

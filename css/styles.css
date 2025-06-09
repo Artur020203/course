@@ -1729,7 +1729,7 @@ main {
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px); /* Reduced distance */
     }
     to {
         opacity: 1;
@@ -1739,8 +1739,8 @@ main {
 
 .fade-in {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(20px); /* Reduced initial distance */
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Faster duration */
 }
 
 .fade-in.visible {
