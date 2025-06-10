@@ -269,9 +269,9 @@ main {
 /* author-stats */
 .author-stats {
     padding: 4rem 2rem;
-    background-color: rgba(255, 165, 0, 0.05);
-    border-top: 1px solid rgba(255, 165, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 165, 0, 0.1);
+    /* background-color: rgba(255, 165, 0, 0.05); */
+    /* border-top: 1px solid rgba(255, 165, 0, 0.1); */
+    /* border-bottom: 1px solid rgba(255, 165, 0, 0.1); */
 }
 
 .stats-container {
@@ -478,7 +478,7 @@ main {
 /* course results */
 .advantages {
     padding: 6rem 2rem;
-    background-color: rgba(255, 165, 0, 0.05);
+    /* background-color: rgba(255, 165, 0, 0.05); */
 }
 
 .advantages-grid {
@@ -574,11 +574,11 @@ main {
     align-items: flex-start;
     gap: 2rem;
     padding: 2rem;
-    background: linear-gradient(
+    /* background: linear-gradient(
         145deg,
         rgba(255, 165, 0, 0.1),
         rgba(255, 165, 0, 0.02)
-    );
+    ); */
     border-radius: 15px;
     transition: transform 0.3s ease;
 }
@@ -645,7 +645,7 @@ main {
 
 .course-details {
     padding: 6rem 2rem;
-    background-color: rgba(255, 165, 0, 0.05);
+    /* background-color: rgba(255, 165, 0, 0.05); */
 }
 
 .course-details-container {
@@ -854,7 +854,7 @@ main {
 }
 
 .lesson-outcomes {
-    background: rgba(255, 165, 0, 0.05);
+    /* background: rgba(255, 165, 0, 0.05); */
     padding: 1.5rem;
     border-radius: 15px;
 }
@@ -979,7 +979,7 @@ main {
 /*pircing*/
 .pricing {
     padding: 6rem 2rem;
-    background-color: rgba(255, 165, 0, 0.05);
+    /* background-color: rgba(255, 165, 0, 0.05); */
 }
 
 .pricing-grid {
@@ -1207,10 +1207,10 @@ main {
     margin: 0 auto;
     text-align: center;
     padding: 3rem;
-    background: linear-gradient(145deg, 
+    /* background: linear-gradient(145deg, 
         rgba(255, 165, 0, 0.1),
         rgba(255, 165, 0, 0.05)
-    );
+    ); */
     border-radius: 20px;
 }
 
@@ -1340,7 +1340,7 @@ main {
 /* faq */
 .faq {
     padding: 6rem 2rem;
-    background-color: rgba(255, 165, 0, 0.05);
+    /* background-color: rgba(255, 165, 0, 0.05); */
 }
 
 .faq-container {
@@ -1613,7 +1613,7 @@ main {
 /*contact form*/
 .contact {
     padding: 6rem 2rem;
-    background-color: rgba(255, 165, 0, 0.05);
+    /* background-color: rgba(255, 165, 0, 0.05); */
 }
 
 .contact-container {
