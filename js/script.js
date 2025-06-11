@@ -119,33 +119,127 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
-    document.querySelectorAll('.contactForm').forEach(form => {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
+    document.querySelectorAll('.contact-form').forEach(form => {
+        form.addEventListener('submit', formSend)
+        // form.addEventListener('submit', function (e) {
+        //     e.preventDefault();
 
-            // const formData = new FormData(this);
-            // const data = Object.fromEntries(formData);
+        //     const TOKEN = ""; // TODO use token telegram bot
+        //     const CHAT_ID = ""; // TODO use chat_Id to telegram
+        //     const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
-            // // Add loading state
-            // const submitBtn = this.querySelector('.submit-btn');
-            // const originalText = submitBtn.innerHTML;
-            // submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Відправка...';
-            // submitBtn.disabled = true;
+        //     const formData = new FormData(this);
+        //     const data = Object.fromEntries(formData);
 
-            // // Simulate form submission (replace with actual API call)
-            // setTimeout(() => {
-            //     console.log('Form data:', data);
+        //     // Add loading state
+        //     const submitBtn = this.querySelector('.submit-btn');
+        //     const originalText = submitBtn.innerHTML;
+        //     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Відправка...';
+        //     submitBtn.disabled = true;
 
-            //     // Reset form
-            //     this.reset();
 
-            //     // Reset button
-            //     submitBtn.innerHTML = originalText;
-            //     submitBtn.disabled = false;
 
-            //     // Show success message (implement your own notification system)
-            //     alert('Дякуємо! Ми зв\'яжемося з вами найближчим часом.');
-            // }, 1500);
-        });
+        //     // Simulate form submission (replace with actual API call)
+        //     setTimeout(() => {
+        //         console.log('Form data:', data);
+
+        //         // Reset form
+        //         this.reset();
+
+        //         // Reset button
+        //         submitBtn.innerHTML = originalText;
+        //         submitBtn.disabled = false;
+
+        //         // Show success message (implement your own notification system)
+        //         alert('Дякуємо! Ми зв\'яжемося з вами найближчим часом.');
+        //     }, 1500);
+        // });
     })
 });
+async function formSend(event) {
+    event.preventDefault();
+
+    const TOKEN = "7626620548:AAGQ4SRgOXu_Q_3XL_T5bMD-3puSIu8cCEY"; // TODO use token telegram bot
+    const CHAT_ID = "-1002722471061"; // TODO use chat_Id to telegram
+    const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+    const form = event.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    let message = `
+        <b>Дані з форми:</b>
+        <b>Ім'я: ${data.name}</b>
+        <b>Номер телефону:  ${data.phone}</b>
+        <b>Нік в Telegram:  ${data.nikname}</b>
+        `;
+
+    // Add loading state
+    const submitBtn = form.querySelector('.submit-btn');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Відправка...';
+    submitBtn.disabled = true;
+
+    try {
+        const response = await fetch(URI_API, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: message,
+                parse_mode: "html",
+            }),
+        });
+
+        const result = await response.json();
+
+        if (result.ok) {
+            form.reset();
+            showMessage(true);
+        } else {
+            throw new Error('Failed to send message');
+        }
+    } catch (error) {
+        console.error(error);
+        showMessage(false);
+    } finally {
+        // Reset button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+}
+function showMessage(isSuccess) {
+    // Create alert element
+    const alert = document.createElement('div');
+    alert.className = `alert ${isSuccess ? 'alert-success' : 'alert-error'}`;
+    
+    // Set message content
+    alert.innerHTML = `
+        <i class="fas ${isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+        <span>${isSuccess ? 'Дякуємо! Ми зв\'яжемося з вами найближчим часом.' : 'Помилка! Спробуйте ще раз.'}</span>
+        <button class="alert-close">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+    
+    // Add to document
+    document.body.appendChild(alert);
+    
+    // Show alert
+    setTimeout(() => alert.classList.add('show'), 100);
+    
+    // Add close button handler
+    const closeBtn = alert.querySelector('.alert-close');
+    closeBtn.addEventListener('click', () => {
+        alert.classList.remove('show');
+        setTimeout(() => alert.remove(), 300);
+    });
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (document.body.contains(alert)) {
+            alert.classList.remove('show');
+            setTimeout(() => alert.remove(), 300);
+        }
+    }, 5000);
+}
